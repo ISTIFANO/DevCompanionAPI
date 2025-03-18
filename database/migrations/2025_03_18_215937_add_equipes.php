@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('equipes', function (Blueprint $table) {
             $table->id();
-            $table->string('role_name');
-        });
-    }
+            $table->string('name');
+            $table->string('logo')->nullable();
+            $table->foreignId('hackathon_id')->constrained('hackathons');
+            $table->timestamps();
+        });   
+     }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('equipes');
     }
 };

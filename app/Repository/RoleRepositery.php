@@ -10,9 +10,9 @@ class RoleRepositery implements RoleInterface {
 
 public function findbyName($data)
 {
-    $role = Role::where('name','=',$data)->first();
+    $role = Role::where('role_name','=',$data)->first();
 
-    return   $role;
+    return   $role->id;
 }
 
 
