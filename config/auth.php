@@ -13,14 +13,14 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+   'defaults' => [
+        'guard' => 'api',
+        'passwords' => 'users',
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Guards
+    | Authentication Guardsn
     |--------------------------------------------------------------------------
     |
     | Next, you may define every authentication guard for your application.
@@ -34,6 +34,10 @@ return [
     | Supported: "session"
     |
     */
+    'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+],
 
     'guards' => [
         'web' => [
