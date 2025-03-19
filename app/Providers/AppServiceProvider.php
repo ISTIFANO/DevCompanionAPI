@@ -12,6 +12,8 @@ use App\Repository\NoteRepositery;
 use App\Repository\RoleRepositery;
 use App\Repository\ThemeRepositery;
 use App\Repository\UserRepositery;
+use App\Services\HackathonServices;
+use App\Services\interfaces\HackathonInterface as InterfacesHackathonInterface;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(Themeinterface::class,ThemeRepositery::class);
         $this->app->bind(HackathonInterface::class,HackathonRepositery::class);
 
+        $this->app->bind(InterfacesHackathonInterface::class,HackathonServices::class);
 
     }
 

@@ -7,6 +7,8 @@ use App\Repository\RoleRepositery;
 use App\Repository\UserRepositery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -16,18 +18,23 @@ class AuthController extends Controller
     public function Login(Request $request)
     {
 
-        $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string'
-        ]);
-        $token = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+        $credentials = $request->only('email', 'password');
 
-        if ($token) {
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'Invalid credentials'], 401);
+            }
 
-            return ['error' => 'email ou password not valide '];
+            // Get the authenticated user.
+            $user = auth()->user();
+
+            // (optional) Attach the role to the token.
+            $token = JWTAuth::claims(['role' => $user->role])->fromUser($user);
+
+            return response()->json(compact('token'));
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Could not create token'], 500);
         }
-        $user = Auth::user();
-        return response()->json(["message" => "login succ", "user" => $user, "token" => $token]);
     }
     public function logout()
     {

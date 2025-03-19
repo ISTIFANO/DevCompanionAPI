@@ -2,9 +2,7 @@
 namespace App\Repository;
 
 use App\Models\Theme;
-use App\Models\User;
 use App\Repository\interfaces\Themeinterface;
-use Illuminate\Support\Facades\Hash;
 
 class ThemeRepositery implements Themeinterface{
 

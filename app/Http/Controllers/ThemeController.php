@@ -2,65 +2,88 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Theme;
+use GuzzleHttp\Psr7\Request;
+use App\Repository\ThemeRepositery;
 use App\Http\Requests\StoreThemeRequest;
 use App\Http\Requests\UpdateThemeRequest;
 
 class ThemeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(protected ThemeRepositery $theme_repositery)
+    {
+        $this->theme_repositery = $theme_repositery;
+    }
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreThemeRequest $request)
+    public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([ 
+                'name' => 'required|string|max:255',
+                'cover' => 'required|string|max:255'
+            ]);
+            
+            $data = [
+                'name' => $request->name,
+                'cover' => $request->cover
+            ];
+
+            $theme = $this->theme_repositery->register($data);
+
+            return $this->finalResponse($theme);
+        } catch (Exception $e) {
+            return $this->finalResponse($e);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Theme $theme)
+    public function show()
     {
-        //
+        $data = $this->theme_repositery->show();
+
+        return $this->finalResponse($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Theme $theme)
+    public function edit(Request $request)
     {
-        //
+        try {
+            $request->validate([ 
+                'name' => 'required|string|max:255',
+                'cover' => 'required|string|max:255'
+            ]);
+            
+            $data = [
+                'name' => $request->name,
+                'cover' => $request->cover
+            ];
+
+            $theme = $this->theme_repositery->update($data, $request->id);
+
+            return $this->finalResponse($theme);
+        } catch (Exception $e) {
+            return $this->finalResponse($e);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateThemeRequest $request, Theme $theme)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Theme $theme)
+    public function destroy(Request $request)
     {
-        //
+        $deletedData = $this->theme_repositery->delete($request->id);
+
+        return $this->finalResponse($deletedData);
     }
 }

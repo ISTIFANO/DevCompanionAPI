@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Hackathon_rule;
 use App\Http\Requests\StoreHackathon_ruleRequest;
 use App\Http\Requests\UpdateHackathon_ruleRequest;
+use App\Repository\HackathonRepositery;
+use GuzzleHttp\Psr7\Request;
 
 class HackathonRuleController extends Controller
 {
+
+    public function __construct(protected HackathonRepositery $hackathon_repositery)
+    {
+        $this->hackathon_repositery = $hackathon_repositery;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,9 +34,17 @@ class HackathonRuleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHackathon_ruleRequest $request)
-    {
-        //
+    public function store(Request $request)
+    {  
+      $data =    $request->validate([
+        'theme_id' => 'required',
+        'organisateur_id' => 'required',
+        'name' => 'required|string|email',
+        'description' => 'required|string',
+        'start_date' => 'required',
+        'end_date' => 'required']);
+
+        $this->hackathon_repositery->register($data);
     }
 
     /**
