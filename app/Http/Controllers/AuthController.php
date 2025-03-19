@@ -7,7 +7,6 @@ use App\Repository\RoleRepositery;
 use App\Repository\UserRepositery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -21,14 +20,12 @@ class AuthController extends Controller
             'email' => 'required|string',
             'password' => 'required|string'
         ]);
+        $token = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
-        $data = $request->only('email', 'password');
-        $token = Auth::attempt($data);
-        if (!$token) {
+        if ($token) {
 
             return ['error' => 'email ou password not valide '];
         }
-
         $user = Auth::user();
         return response()->json(["message" => "login succ", "user" => $user, "token" => $token]);
     }
@@ -47,7 +44,7 @@ class AuthController extends Controller
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'phone' => 'required|string',
+            'phone' => 'required',
             'image' => 'required|string',
             'role' => 'required|string',
         ]);
@@ -62,7 +59,8 @@ class AuthController extends Controller
             'message' => 'User created successfully',
             'user' => $user,
             'authorisation' => [
-                'token' => $token          ]
+                'token' => $token
+            ]
         ]);
     }
 }

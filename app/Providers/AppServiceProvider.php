@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repository\interfaces\RoleInterface;
 use App\Repository\interfaces\UserInterface;
+use App\Repository\RoleRepositery;
 use App\Repository\UserRepositery;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(UserRepositery::class,UserInterface::class);
+        $this->app->bind(UserInterface::class,UserRepositery::class);
+        $this->app->bind(RoleInterface::class,RoleRepositery::class);
+
     }
 
     /**

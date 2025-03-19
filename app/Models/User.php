@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,8 +24,15 @@ class User extends Authenticatable implements JWTSubject{
         'lastname',
         'email',
         'password',
-        'phone'
+        'phone',
+        'image',
+         'role_id'
+
     ];
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id'); 
+    }
 protected $table="users";
     /**
      * The attributes that should be hidden for serialization.

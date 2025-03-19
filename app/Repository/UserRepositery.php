@@ -8,7 +8,7 @@ use App\Repository\interfaces\UserInterface;
 class UserRepositery implements UserInterface {
 
 
-public function register($data)
+public function register($data,$role)
 {
     $user = User::create([
         'firstname' => $data['firstname'],
@@ -16,7 +16,8 @@ public function register($data)
         'email' => $data['email'],
         'password' => Hash::make($data['password']),
         'phone' => $data['phone'],
-        'image' => $data['image']
+        'image' => $data['image'],
+        'role_id'=>$role
 
     ]);
 
