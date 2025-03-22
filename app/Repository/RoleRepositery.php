@@ -12,7 +12,7 @@ public function findbyName($data)
 {
     $role = Role::where('role_name','=',$data)->first();
 
-    return   $role->id;
+    return   $role;
 }
 
 

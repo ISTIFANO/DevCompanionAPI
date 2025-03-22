@@ -24,11 +24,8 @@ class AuthController extends Controller
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'Invalid credentials'], 401);
             }
-
             // Get the authenticated user.
             $user = auth()->user();
-
-            // (optional) Attach the role to the token.
             $token = JWTAuth::claims(['role' => $user->role])->fromUser($user);
 
             return response()->json(compact('token'));
@@ -69,5 +66,9 @@ class AuthController extends Controller
                 'token' => $token
             ]
         ]);
+    }
+
+    public function refresh(){
+        return ["user"=>Auth::user()->role->role_name];
     }
 }
