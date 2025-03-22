@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Middleware\CheckRole;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -12,9 +13,9 @@ Route::get('/user', function (Request $request) {
 
 
 
-Route::middleware(['role:admin'])->group(function () {
+Route::middleware(CheckRole::class)->group(function () {
     Route::get('/testadmin', function () {
-     
+   return ['admin'=>' this is Admin  '];
     })->name('testadmin');
 });
 

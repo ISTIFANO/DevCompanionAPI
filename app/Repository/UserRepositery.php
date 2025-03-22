@@ -10,17 +10,18 @@ class UserRepositery implements UserInterface {
 
 public function register($data,$role)
 {
-    $user = User::create([
-        'firstname' => $data['firstname'],
-        'lastname' => $data['lastname'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password']),
-        'phone' => $data['phone'],
-        'image' => $data['image'],
-        'role_id'=>$role
+  
 
-    ]);
+    $user = new User;
+$user->firstname = $data['firstname'];
+        $user->lastname = $data['lastname'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->phone = $data['phone'];
+        $user->image = $data['image'];
+$user->role()->associate($role);
 
+$user->save();
     return   $user;
 }
 

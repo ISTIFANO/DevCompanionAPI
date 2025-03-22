@@ -15,16 +15,20 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next ,$role): Response
+    public function handle(Request $request, Closure $next ): Response
     {
 try{
-$user = Auth::user();
+// $user = Auth::user();
 
-if(!$user || $user->role || $user->role->role_name !== $role){
+if(Auth::user()->role->role_name == 'Admin'){
 
-    return response()->json(['message' => 'Acces non autorise.']);
-
+    return response()->json(['message' => 'Acces non autorise Admin.']);
 }
+// }else if(!$user || $user->role || $user->role->role_name !== 'Participant'){
+
+//     return response()->json(['message' => 'Acces non autorise pour Participant .']);
+
+// }
 
 
 }catch(Exception $e){
