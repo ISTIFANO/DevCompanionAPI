@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Equipe;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 use App\Repository\EquipeRepositery;
-
+use App\Repository\ThemeRepositery;
 
 class EquipeController extends Controller
 {
@@ -49,7 +50,6 @@ public function __construct(protected EquipeRepositery $equipe_repositery)
                 'logo' => $request->logo,
                 'hackathon_id' =>$request->hackathon_id
             ];
-    
             $equipe = $this->equipe_repositery->register($data);
     
             return response()->json(["data" => $equipe]);
@@ -79,10 +79,10 @@ public function __construct(protected EquipeRepositery $equipe_repositery)
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEquipeRequest $request, Equipe $equipe)
-    {
-        //
-    }
+    // public function update(UpdateEquipeRequest $request, Equipe $equipe)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.

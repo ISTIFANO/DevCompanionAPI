@@ -34,6 +34,12 @@ public function update($data,$id){
     DB::table("themes")->where('id','=',$id)->update($data);
 
 }
+public function findbyid($id){
+
+$theme =    DB::table("themes")->where('id','=',$id)->first();
+
+return $theme;
+}
 
 
 }

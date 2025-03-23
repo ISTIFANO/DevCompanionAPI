@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('date');
             $table->text('description')->nullable();
-            $table->foreignId('hackathon_id')->constrained('hackathons');
+            $table->foreignId('theme_id')->constrained('themes');
             $table->timestamps();
         });
     }
