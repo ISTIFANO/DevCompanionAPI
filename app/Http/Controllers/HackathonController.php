@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\Hackathon;
 use App\Services\HackathonServices;
-use App\Repository\HackathonRepository;
 use App\Repository\HackathonRepositery;
 use Symfony\Component\HttpFoundation\Request;
 

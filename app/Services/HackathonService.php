@@ -1,7 +1,7 @@
 <?php 
 namespace App\Services;
 
-use App\Services\interfaces\HackathonInterface;
+use App\Services\interfaces\HackathonInterfaces;
 
 class HackathonServices implements HackathonInterfaces {
 

@@ -2,13 +2,14 @@
 namespace App\Repository;
 
 use App\Models\Theme;
+use Illuminate\Support\Facades\DB;
 use App\Repository\interfaces\Themeinterface;
 
 class ThemeRepositery implements Themeinterface{
 
 
 public function register($data){
-    $theme = Theme::create([
+    $theme = DB::table("themes")->insert([
         'name' => $data['name'],
         'cover' => $data['cover'],
     ]);
@@ -17,7 +18,7 @@ public function register($data){
 }
 
 public function show(){
-    $theme = Theme::all();
+    $theme = DB::table("themes")->get();
 
     return $theme;
 
@@ -25,12 +26,12 @@ public function show(){
 
 public function delete($id){
 
-    Theme::where('id','=',$id)->delete();
+    DB::table("themes")->where('id','=',$id)->delete();
 
     return true;
 }
 public function update($data,$id){
-    Theme::where('id','=',$id)->update($data);
+    DB::table("themes")->where('id','=',$id)->update($data);
 
 }
 

@@ -2,21 +2,23 @@
 
 namespace App\Providers;
 
-use App\Repository\HackathonRepositery;
-use App\Repository\interfaces\HackathonInterface;
-use App\Repository\interfaces\NoteInterface;
-use App\Repository\interfaces\RoleInterface;
-use App\Repository\interfaces\Themeinterface;
-use App\Repository\interfaces\UserInterface;
+use App\Models\Hackathon_rule;
 use App\Repository\NoteRepositery;
 use App\Repository\RoleRepositery;
-use App\Repository\ThemeRepositery;
 use App\Repository\UserRepositery;
+use App\Repository\ThemeRepositery;
 use App\Services\HackathonServices;
-use App\Services\interfaces\HackathonInterface as InterfacesHackathonInterface;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-
+use App\Repository\HackathonRepositery;
+use Illuminate\Support\ServiceProvider;
+use App\Repository\interfaces\NoteInterface;
+use App\Repository\interfaces\RoleInterface;
+use App\Repository\interfaces\UserInterface;
+use App\Repository\interfaces\Themeinterface;
+use App\Services\interfaces\HackathonInterfaces;
+use App\Repository\interfaces\HackathonInterface;
+use App\Repository\interfaces\RulesInterface;
+use App\Repository\RulesRepositery;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +32,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(NoteInterface::class,NoteRepositery::class);
         $this->app->bind(Themeinterface::class,ThemeRepositery::class);
         $this->app->bind(HackathonInterface::class,HackathonRepositery::class);
+        $this->app->bind(HackathonInterfaces::class,HackathonServices::class);
+        $this->app->bind(RulesInterface::class,RulesRepositery::class);
 
-        $this->app->bind(InterfacesHackathonInterface::class,HackathonServices::class);
 
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Services\interfaces;
 
-interface HackathonInterface{
+interface HackathonInterfaces{
 
     public function Validation($data,$value);
 }

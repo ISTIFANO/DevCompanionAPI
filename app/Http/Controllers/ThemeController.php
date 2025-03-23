@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Theme;
-use GuzzleHttp\Psr7\Request;
 use App\Repository\ThemeRepositery;
-use App\Http\Requests\StoreThemeRequest;
-use App\Http\Requests\UpdateThemeRequest;
+use Illuminate\Http\Request;
+
 
 class ThemeController extends Controller
 {
@@ -28,18 +27,21 @@ class ThemeController extends Controller
 
     public function store(Request $request)
     {
+
         try {
             $request->validate([ 
                 'name' => 'required|string|max:255',
                 'cover' => 'required|string|max:255'
             ]);
-            
+
             $data = [
                 'name' => $request->name,
                 'cover' => $request->cover
             ];
 
             $theme = $this->theme_repositery->register($data);
+
+            return ["zdd"=> $theme ];
 
             return $this->finalResponse($theme);
         } catch (Exception $e) {
@@ -75,7 +77,7 @@ class ThemeController extends Controller
         }
     }
 
-    public function update(UpdateThemeRequest $request, Theme $theme)
+    public function update(Request $request)
     {
         //
     }
