@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\Note;
-use App\Repository\NoteRepositery;
-use App\Http\Requests\StoreNoteRequest;
-use App\Http\Requests\UpdateNoteRequest;
+use App\Models\Memberjurie;
+use App\Http\Requests\StoreMemberjurieRequest;
+use App\Http\Requests\UpdateMemberjurieRequest;
+use App\Repository\MemberjurieRepositery;
 
-class NoteController extends Controller
+class MemberjurieController extends Controller
 {
-    public function __construct(protected NoteRepositery $note_repositery)
-{
-    $this->note_repositery = $note_repositery;
-}
+
+    public function __construct(protected MemberjurieRepositery $memberjurie_repositery)
+    {
+        $this->$memberjurie_repositery = $memberjurie_repositery;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -33,25 +34,20 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreNoteRequest $request)
+    public function store(StoreMemberjurieRequest $request)
     {
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'date' => 'required',
-                'description' =>'required'
-            ]);
+                'code' => 'required'            ]);
     
             $data = [
                 'name' => $request->name,
-                'date' => $request->date,
-                'description' =>$request->description
+                'code' => $request->code,
             ];
 
-            $theme = $this->theme_repositery->findbyid($request->theme_id);
 
-
-            $equipe = $this->project_repositery->register($data,$equipe,$);
+            $equipe = $this->memberjurie_repositery->register($data);
             return response()->json(["data" => $equipe]);
     
         } catch (Exception $e) {
@@ -63,7 +59,7 @@ class NoteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Note $note)
+    public function show(Memberjurie $memberjurie)
     {
         //
     }
@@ -71,7 +67,7 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Note $note)
+    public function edit(Memberjurie $memberjurie)
     {
         //
     }
@@ -79,7 +75,7 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNoteRequest $request, Note $note)
+    public function update(UpdateMemberjurieRequest $request, Memberjurie $memberjurie)
     {
         //
     }
@@ -87,7 +83,7 @@ class NoteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Note $note)
+    public function destroy(Memberjurie $memberjurie)
     {
         //
     }

@@ -4,15 +4,21 @@ namespace App\Repository;
 
 use App\Models\Note;
 use App\Repository\interfaces\NoteInterface;
-use Illuminate\Support\Facades\Hash;
 
 class NoteRepositery implements NoteInterface
 {
+    protected Note $note;
+    public function __construct()
+    {
+        $this->note = new Note();
+
+        
+    }
 
 
     public function register($data)
     {
-        $note = Note::create([
+        $note = $this->note->create([
             'date' => $data['date'],
             'commentaire' => $data['commentaire'],
             'membre_id' => $data['membre_id'],
@@ -24,7 +30,7 @@ class NoteRepositery implements NoteInterface
 
     public function show()
     {
-        $Note = Note::all();
+        $Note = $this->note->all();
 
         return $Note;
     }
@@ -32,13 +38,13 @@ class NoteRepositery implements NoteInterface
     public function delete($id)
     {
 
-        Note::where('id', '=', $id)->delete();
+        $this->note->where('id', '=', $id)->delete();
 
         return true;
     }
     public function update($data, $id)
     {
-        $data =  Note::where('id', '=', $id)->update($data);
+        $data =  $this->note->where('id', '=', $id)->update($data);
 
         return $data;
     }
