@@ -9,4 +9,8 @@ class Theme extends Model
 {
     /** @use HasFactory<\Database\Factories\ThemeFactory> */
     use HasFactory;
+    public function projects(){
+
+        return $this->hasMany(Project::class);
+     }
 }

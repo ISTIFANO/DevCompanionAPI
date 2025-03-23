@@ -9,4 +9,12 @@ class Equipe extends Model
 {
     /** @use HasFactory<\Database\Factories\EquipeFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'logo',
+        'hackathon_id'
+ 
+     ];
+     protected $table ="equipes";
 }
