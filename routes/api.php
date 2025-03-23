@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\ActiviteController;
 use Illuminate\Http\Request;
+use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\EquipeController;
-use App\Http\Controllers\HackathonController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\ThemeController;
-use App\Http\Middleware\CheckRole;
+use App\Http\Controllers\EquipeController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ActiviteController;
+use App\Http\Controllers\HackathonController;
+use App\Http\Controllers\MemberjurieController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -48,6 +49,11 @@ Route::middleware(CheckRole::class)->group(function () {
     Route::post('/activite/edit',[ActiviteController::class,'edit']);
     Route::post('/activite/destroy',[ActiviteController::class,'destroy']);
 
+    
+    Route::post('/memberjurie/create',[MemberjurieController::class,'store']);
+    Route::post('/memberjurie/show',[MemberjurieController::class,'show']);
+    Route::post('/memberjurie/edit',[MemberjurieController::class,'edit']);
+    Route::post('/memberjurie/destroy',[MemberjurieController::class,'destroy']);
 
 
     Route::post('/project/create',[ProjectController::class,'store']);

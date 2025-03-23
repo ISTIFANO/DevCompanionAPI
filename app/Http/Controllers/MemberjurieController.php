@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Memberjurie;
-use App\Http\Requests\StoreMemberjurieRequest;
-use App\Http\Requests\UpdateMemberjurieRequest;
+use Illuminate\Http\Request;
 use App\Repository\MemberjurieRepositery;
 
 class MemberjurieController extends Controller
@@ -13,7 +12,7 @@ class MemberjurieController extends Controller
 
     public function __construct(protected MemberjurieRepositery $memberjurie_repositery)
     {
-        $this->$memberjurie_repositery = $memberjurie_repositery;
+        $this->memberjurie_repositery = $memberjurie_repositery;
     }
     /**
      * Display a listing of the resource.
@@ -34,7 +33,7 @@ class MemberjurieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMemberjurieRequest $request)
+    public function store(Request $request)
     {
         try {
             $request->validate([
