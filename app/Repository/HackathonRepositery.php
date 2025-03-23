@@ -2,10 +2,9 @@
 
 namespace App\Repository;
 
+use App\Models\Hackathon;
 use App\Models\Note;
 use App\Repository\interfaces\HackathonInterface;
-use App\Repository\interfaces\NoteInterface;
-use Illuminate\Support\Facades\Hash;
 
 class HackathonRepositery implements HackathonInterface
 {
@@ -13,7 +12,9 @@ class HackathonRepositery implements HackathonInterface
 
     public function register($data)
     {
-        $note = Note::create([
+        // return['message'=>$note];
+
+        $note = Hackathon::create([
             'theme_id' => $data['theme_id'],
             'organisateur_id' => $data['organisateur_id'],
             'name' => $data['name'],
@@ -21,6 +22,8 @@ class HackathonRepositery implements HackathonInterface
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date']
         ]);
+
+
 
         return   $note;
     }

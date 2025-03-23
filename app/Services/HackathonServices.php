@@ -1,6 +1,7 @@
 <?php 
 namespace App\Services;
 
+use Exception;
 use App\Services\interfaces\HackathonInterfaces;
 
 class HackathonServices implements HackathonInterfaces {
@@ -70,7 +71,7 @@ class HackathonServices implements HackathonInterfaces {
 
 
 
-}
+
 
 
 

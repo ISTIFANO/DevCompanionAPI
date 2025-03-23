@@ -66,18 +66,12 @@ class RuleController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Rule $rule)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRuleRequest $request, Rule $rule)
+    public function update(Request $request)
     {
         //
     }
