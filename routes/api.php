@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\ActiviteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\HackathonController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Middleware\CheckRole;
@@ -40,6 +42,18 @@ Route::middleware(CheckRole::class)->group(function () {
     Route::post('/equipe/edit',[EquipeController::class,'edit']);
     Route::post('/equipe/destroy',[EquipeController::class,'destroy']);
 
+
+    Route::post('/activite/create',[ActiviteController::class,'store']);
+    Route::post('/activite/show',[ActiviteController::class,'show']);
+    Route::post('/activite/edit',[ActiviteController::class,'edit']);
+    Route::post('/activite/destroy',[ActiviteController::class,'destroy']);
+
+
+
+    Route::post('/project/create',[ProjectController::class,'store']);
+    Route::post('/project/show',[ProjectController::class,'show']);
+    Route::post('/project/edit',[ProjectController::class,'edit']);
+    Route::post('/project/destroy',[ProjectController::class,'destroy']);
 
 
     Route::post('/rule/create',[RuleController::class,'store']);

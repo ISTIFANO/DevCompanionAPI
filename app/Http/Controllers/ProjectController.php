@@ -47,13 +47,14 @@ class ProjectController extends Controller
     
             $data = [
                 'name' => $request->name,
-                'logo' => $request->logo,
-                'theme_id' =>$request->theme_id
+                'date' => $request->date,
+                'description' =>$request->description
             ];
+
             $theme = $this->theme_repositery->findbyid($request->theme_id);
 
+
             $equipe = $this->project_repositery->register($data,$theme);
-    
             return response()->json(["data" => $equipe]);
     
         } catch (Exception $e) {

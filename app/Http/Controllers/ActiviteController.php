@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Activite;
-use App\Http\Requests\StoreActiviteRequest;
-use App\Http\Requests\UpdateActiviteRequest;
+use App\Repository\ActiviteRepositery;
+use Illuminate\Http\Request;
 
 class ActiviteController extends Controller
 {
+    public function __construct(protected ActiviteRepositery $activite_repositery)
+    {
+        $this->activite_repositery = $activite_repositery;
+    
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,9 +33,32 @@ class ActiviteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreActiviteRequest $request)
+    public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'date' => 'required',
+                'description' =>'required'
+            ]);
+    
+            $data = [
+                'name' => $request->name,
+                'date' => $request->date,
+                'description' =>$request->description
+            ];
+
+
+
+            $activite = $this->activite_repositery->register($data);
+
+            return response()->json(["data" => $activite]);
+    
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);  
+        } 
     }
 
     /**

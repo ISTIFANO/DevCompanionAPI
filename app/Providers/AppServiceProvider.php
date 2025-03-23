@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Hackathon_rule;
+use App\Repository\ActiviteRepositery;
 use App\Repository\EquipeRepositery;
 use App\Repository\NoteRepositery;
 use App\Repository\RoleRepositery;
@@ -11,6 +12,7 @@ use App\Repository\ThemeRepositery;
 use App\Services\HackathonServices;
 use Illuminate\Support\Facades\Schema;
 use App\Repository\HackathonRepositery;
+use App\Repository\interfaces\ActiviteInterface;
 use App\Repository\interfaces\EquipeInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\interfaces\NoteInterface;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RulesInterface::class,RulesRepositery::class);
         $this->app->bind(EquipeInterface::class,EquipeRepositery::class);
         $this->app->bind(ProjectInterface::class,ProjectRepositery::class);
+        $this->app->bind(ActiviteInterface::class,ActiviteRepositery::class);
 
 
     }

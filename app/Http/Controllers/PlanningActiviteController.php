@@ -8,6 +8,8 @@ use App\Http\Requests\UpdatePlanning_activiteRequest;
 
 class PlanningActiviteController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      */

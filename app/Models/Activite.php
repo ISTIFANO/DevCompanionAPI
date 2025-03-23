@@ -9,4 +9,11 @@ class Activite extends Model
 {
     /** @use HasFactory<\Database\Factories\ActiviteFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name','description','date'
+     ];
+     protected $table ="activites";
+
+
 }
