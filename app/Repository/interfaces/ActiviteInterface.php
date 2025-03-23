@@ -2,25 +2,12 @@
 
 namespace App\Repository\interfaces;
 
-interface ProjectInterface{
+interface ActiviteInterface{
 
-    public function register($data,$theme);
+    public function register($data);
     public function show();
 
     public function delete($data);
     public function update($data,$id);
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

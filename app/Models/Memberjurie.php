@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Activite extends Model
+class Memberjurie extends Model
 {
-    /** @use HasFactory<\Database\Factories\ActiviteFactory> */
+    /** @use HasFactory<\Database\Factories\MemberjurieFactory> */
     use HasFactory;
-
     protected $fillable = [
-        'name','description','date'
+        'name','code'
      ];
-     protected $table ="activites";
-
-
+     protected $table ="memberjuries";
 }

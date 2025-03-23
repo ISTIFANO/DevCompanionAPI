@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\Project;
+use App\Models\Memberjurie;
 use Illuminate\Http\Request;
-use App\Repository\ThemeRepositery;
-use App\Repository\ProjectRepositery;
+use App\Repository\MemberjurieRepositery;
 
-
-class ProjectController extends Controller
+class MemberjurieController extends Controller
 {
-    public function __construct(protected ProjectRepositery $project_repositery, protected ThemeRepositery $theme_repositery)
-{
-    $this->project_repositery = $project_repositery;
-    $this->theme_repositery = $theme_repositery;
 
-}
+    public function __construct(protected MemberjurieRepositery $memberjurie_repositery)
+    {
+        $this->memberjurie_repositery = $memberjurie_repositery;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -36,37 +33,32 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store( Request $request)
+    public function store(Request $request)
     {
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'date' => 'required',
-                'description' =>'required'
-            ]);
+                'code' => 'required'            ]);
     
             $data = [
                 'name' => $request->name,
-                'date' => $request->date,
-                'description' =>$request->description
+                'code' => $request->code,
             ];
 
-            $theme = $this->theme_repositery->findbyid($request->theme_id);
 
-
-            $equipe = $this->project_repositery->register($data,$theme);
+            $equipe = $this->memberjurie_repositery->register($data);
             return response()->json(["data" => $equipe]);
     
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),
             ], 500);  
-        }    }
+        }     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(Memberjurie $memberjurie)
     {
         //
     }
@@ -74,7 +66,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Project $project)
+    public function edit(Memberjurie $memberjurie)
     {
         //
     }
@@ -82,15 +74,15 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // public function update(UpdateProjectRequest $request, Project $project)
-    // {
-    //     //
-    // }
+    public function update(UpdateMemberjurieRequest $request, Memberjurie $memberjurie)
+    {
+        //
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy(Memberjurie $memberjurie)
     {
         //
     }

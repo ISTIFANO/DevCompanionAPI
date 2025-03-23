@@ -36,7 +36,7 @@ public function update($data,$id){
 }
 public function findbyid($id){
 
-$theme =    DB::table("themes")->where('id','=',$id)->first();
+$theme =  Theme::where('id','=',$id)->first();
 
 return $theme;
 }

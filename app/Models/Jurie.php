@@ -9,4 +9,7 @@ class Jurie extends Model
 {
     /** @use HasFactory<\Database\Factories\JurieFactory> */
     use HasFactory;
+
+    protected $fillable = [];
+     protected $table ="juries";
 }
