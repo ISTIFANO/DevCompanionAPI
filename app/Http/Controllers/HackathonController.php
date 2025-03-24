@@ -69,8 +69,19 @@ class HackathonController extends Controller
      */
     public function show()
     {
+    //   return   $role =  auth()->user()->role->role_name ;
+        // return $role->role_name;
+        // return "Ascascasc";
         $data = $this->hackathon_repository->show();
-        return $this->finalResponse($data);
+        if(!empty($data)){
+
+            return $this->finalResponse($data);
+        }
+        else {
+            return response()->json([
+                'message' => 'emprt'
+            ]);
+        }
     }
 
     /**

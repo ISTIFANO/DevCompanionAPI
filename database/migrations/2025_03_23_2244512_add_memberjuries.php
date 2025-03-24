@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('memberjuries', function (Blueprint $table) {
-
-            $table->foreign('jurie_id')->references('id')->on('juries')->onDelete('cascade');
+        Schema::create('memberjuries', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('code');
+            $table->foreignId('jurie_id')->constrained('juries');
+            $table->timestamps();
         });
     }
 
@@ -22,9 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('memberjuries', function (Blueprint $table) {
-   $table->dropForeign(['jurie_id']);
+        Schema::dropIfExists('memberjuries');
 
-   $table->dropColumn('jurie_id');        });
     }
 };

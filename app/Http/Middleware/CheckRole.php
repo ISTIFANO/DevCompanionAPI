@@ -20,15 +20,16 @@ class CheckRole
 try{
 // $user = Auth::user();
 
-if(Auth::user()->role->role_name == 'Admin'){
+if(auth()->user()->role->role_name != 'admin'){
+    return response()->json([
+        'message' => '404',
+        'status' => 404
+    ]);
 
-    return response()->json(['message' => 'Acces non autorise Admin.']);
+    // return response()->json(['message' => 'Acces non autorise Admin.']);
 }
-// }else if(!$user || $user->role || $user->role->role_name !== 'Participant'){
+return $next($request);
 
-//     return response()->json(['message' => 'Acces non autorise pour Participant .']);
-
-// }
 
 
 }catch(Exception $e){

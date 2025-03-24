@@ -33,8 +33,8 @@ Route::middleware(CheckRole::class)->group(function () {
 
 
 
-    Route::post('/hackathon/create',[HackathonController::class,'store']);
-    Route::post('/hackathon/show',[HackathonController::class,'show']);
+    Route::post('/hackathon/create',[HackathonController::class,'store'])->middleware('role');
+    Route::get('/hackathon/show',[HackathonController::class,'show'])->middleware('role');
     Route::post('/hackathon/edit',[HackathonController::class,'edit']);
     Route::post('/hackathon/destroy',[HackathonController::class,'destroy']);
 
@@ -50,7 +50,7 @@ Route::middleware(CheckRole::class)->group(function () {
     Route::post('/activite/destroy',[ActiviteController::class,'destroy']);
 
     
-    Route::post('/memberjurie/create',[MemberjurieController::class,'store']);
+    Route::post('/memberjurie/create',[MemberjurieController::class,'store'])->middleware('role');
     Route::post('/memberjurie/show',[MemberjurieController::class,'show']);
     Route::post('/memberjurie/edit',[MemberjurieController::class,'edit']);
     Route::post('/memberjurie/destroy',[MemberjurieController::class,'destroy']);
