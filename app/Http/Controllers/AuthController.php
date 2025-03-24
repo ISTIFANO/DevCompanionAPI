@@ -43,6 +43,7 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
+
         $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -53,6 +54,7 @@ class AuthController extends Controller
             'role' => 'required|string',
         ]);
         $data = $request->all();
+       
         $role = $this->role_repositery->findbyName($request->role);
 
         $user = $this->user_repositery->register($data, $role);

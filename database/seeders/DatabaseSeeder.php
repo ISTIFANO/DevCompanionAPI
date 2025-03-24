@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         //     'role_name' => 'Participant',
         // ]);
         Role::factory()->create([
-            'role_name' => 'user',
+            'role_name' => 'Admin',
         ]);
         //  User::factory(34)->create();
 

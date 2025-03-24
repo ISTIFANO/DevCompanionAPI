@@ -13,15 +13,14 @@ public function register($data,$role)
   
 
     $user = new User;
-$user->firstname = $data['firstname'];
-        $user->lastname = $data['lastname'];
-        $user->email = $data['email'];
-        $user->password = Hash::make($data['password']);
-        $user->phone = $data['phone'];
-        $user->image = $data['image'];
-$user->role()->associate($role);
-
-$user->save();
+    $user->firstname = $data['firstname'];
+    $user->lastname = $data['lastname'];
+    $user->email = $data['email'];
+    $user->password = Hash::make($data['password']);
+    $user->phone = $data['phone'];
+    $user->image = $data['image'];
+    $user->role()->associate($role);
+    $user->save();
     return   $user;
 }
 
