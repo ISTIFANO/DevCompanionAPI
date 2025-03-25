@@ -22,6 +22,16 @@ public function __construct()
         
         return   $rules;
     }
+    public function store($data){
+        $rules = $this->ruleModel->insert([
+            'name' => $data['name'],
+            'description' => "ajouter votre description",
+        ]);
+    
+        
+        return   $rules;
+        
+    }
     
     public function show(){
         $rules = $this->ruleModel->all();

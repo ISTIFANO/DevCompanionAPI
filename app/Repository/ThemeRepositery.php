@@ -34,9 +34,9 @@ class ThemeRepositery implements Themeinterface
     }
     public function store($data)
     {
-        $theme = DB::table("themes")->insert([
+        $theme = $this->themeModel->create([
             'name' => $data['name'],
-            'cover' => ""
+            'cover' => "ajouter votre theme description "
         ]);
 
         return   $theme;

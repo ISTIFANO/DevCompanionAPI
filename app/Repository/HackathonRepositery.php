@@ -15,7 +15,6 @@ class HackathonRepositery implements HackathonInterface
     {
         // return['message'=>$note];
         try {
-            
             $hackathon = new Hackathon();
             $hackathon->name = $data["name"];
             $hackathon->description = $data["description"];
