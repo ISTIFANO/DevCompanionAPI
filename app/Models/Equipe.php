@@ -12,9 +12,17 @@ class Equipe extends Model
 
     protected $fillable = [
         'name',
-        'logo',
-        'hackathon_id'
+        'logo'
  
      ];
      protected $table ="equipes";
+
+     public function jurie()
+     {
+         return $this->hasMany(Jurie::class);
+     }
+     public function hackathon()
+     {
+         return $this->belongsTo(Hackathon::class, 'hackathon_id');
+     }
 }

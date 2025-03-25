@@ -30,10 +30,14 @@ Route::middleware(CheckRole::class)->group(function () {
 //     }
 // }
 // );
+// test 
+
+Route::post('/organisatur',[AuthController::class,'refresh']);
 
 
 
-    Route::post('/hackathon/create',[HackathonController::class,'store'])->middleware('role');
+
+    Route::post('/hackathon/create',[HackathonController::class,'store']);
     Route::get('/hackathon/show',[HackathonController::class,'show'])->middleware('role');
     Route::post('/hackathon/edit',[HackathonController::class,'edit']);
     Route::post('/hackathon/destroy',[HackathonController::class,'destroy']);
