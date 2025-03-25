@@ -35,7 +35,6 @@ class UserRepositery implements UserInterface
     }
     public function FindOrganisateur($name)
     {
-
         $user =User::where('firstname', '=', $name)->whereHas('role', function ($query) {
             $query->where('role_name', 'organisateur');
         })->get();

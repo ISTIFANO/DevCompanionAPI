@@ -72,28 +72,27 @@ class HackathonServices implements HackathonInterfaces
     public function store($organisateurRequest, $data, $themeRequest, $ruleRequest)
     {
         try {
-
             DB::beginTransaction();
 
             $organisateur = $this->user_repositery->FindOrganisateur($organisateurRequest);
             $hackathon = $this->hackathon_repository->register($data, $organisateur);
+    
 
             foreach ($ruleRequest as $rules) {
                 $HackathonRules = $this->rule__repositery->findByName($rules);
-                if (!empty($HackathonRules)) {
-                    return ['message ' => $HackathonRules . " not found"];
+                if (empty($HackathonRules)) {
+
+                    $this->rule__repositery->store($HackathonRules);
                 }
-                $this->hackathon_repository->registerRoles($hackathon, $HackathonRules);
+                $this->hackathon_repository->registerRoles($hackathon,$HackathonRules);
             }
             foreach ($themeRequest as $theme) {
                 $theme = $this->theme_repositery->findbyName($theme);
                 if (empty($theme)) {
-                    return ["message" => "theme not found"];
+                    $this->theme_repositery->store($data);
                 }
-
                 $this->theme_repositery->register($theme, $hackathon);
                 DB::commit();
-
                 return $hackathon;
             }
         } catch (Exception $e) {
