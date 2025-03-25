@@ -7,12 +7,17 @@ use App\Models\Note;
 use App\Repository\NoteRepositery;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
+use App\Repository\EquipeRepositery;
+use App\Repository\MemberjurieRepositery;
+use App\Repository\ThemeRepositery;
 
 class NoteController extends Controller
 {
-    public function __construct(protected NoteRepositery $note_repositery)
+    public function __construct(protected NoteRepositery $note_repositery,protected EquipeRepositery $equipe_repositery , protected MemberjurieRepositery $memberjurie_repositery)
 {
     $this->note_repositery = $note_repositery;
+    $this->equipe_repositery =$equipe_repositery;
+    $this->memberjurie_repositery = $memberjurie_repositery;
 }
     /**
      * Display a listing of the resource.
@@ -48,10 +53,11 @@ class NoteController extends Controller
                 'description' =>$request->description
             ];
 
-            $theme = $this->theme_repositery->findbyid($request->theme_id);
+            $team = $this->equipe_repositery->findbyid($request->equipe_name);
+            $memberjurie = $this->memberjurie_repositery->findbyName($request->membre_name);
 
 
-            $equipe = $this->project_repositery->register($data,$equipe,$);
+            $equipe = $this->note_repositery->register($data,$team,$memberjurie);
             return response()->json(["data" => $equipe]);
     
         } catch (Exception $e) {

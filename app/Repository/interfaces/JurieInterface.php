@@ -2,9 +2,9 @@
 
 namespace App\Repository\interfaces;
 
-interface MemberjurieInterface{
+interface JurieInterface{
 
-    public function register($data ,$equipe);
+    public function register($data,$team);
     public function show();
 
     public function delete($data);

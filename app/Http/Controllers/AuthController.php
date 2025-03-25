@@ -71,6 +71,9 @@ class AuthController extends Controller
     }
 
     public function refresh(){
-        return ["user"=>Auth::user()->role->role_name];
+        $user =User::where('name', '=', "Aamir")->whereHas('role', function ($query) {
+            $query->where('role_name', 'organisateur');
+        })->get();
+return ["message"=>$user];
     }
 }

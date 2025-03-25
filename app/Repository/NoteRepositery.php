@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Models\Note;
 use App\Repository\interfaces\NoteInterface;
+use Exception;
 
 class NoteRepositery implements NoteInterface
 {
@@ -11,20 +12,22 @@ class NoteRepositery implements NoteInterface
     public function __construct()
     {
         $this->note = new Note();
-
-        
     }
 
 
-    public function register($data)
+    public function register($data, $team, $memberjurie)
     {
-        $note = $this->note->create([
-            'date' => $data['date'],
-            'commentaire' => $data['commentaire'],
-            'membre_id' => $data['membre_id'],
-            'equipe_id' => $data['equipe_id']
-        ]);
-
+        try {
+            
+            $note = new Note();
+            $note->commentaire = $data["commentaire"];
+            $note->date = $data["date"];
+            $note->equipe()->associate($team);
+            $note->membre()->associate($memberjurie);
+            $note->save();
+        } catch (Exception $e) {
+            return ["message" => $e->getMessage()];
+        }
         return   $note;
     }
 

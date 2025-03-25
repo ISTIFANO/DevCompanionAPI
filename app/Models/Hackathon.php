@@ -11,7 +11,20 @@ class Hackathon extends Model
     use HasFactory;
 
     protected $fillable = [
-        'theme_id','organisateur_id','name','description','start_date','end_date'
+     'name','description','start_date','end_date'
      ];
      protected $table ="hackathons";
+
+     public function theme()
+     {
+         return $this->belongsTo(Theme::class,'theme_id');
+     }
+     public function user()
+     {
+         return $this->belongsTo(User::class,'organisateur_id');
+     }
+     public function rules()
+     {
+         return $this->belongsToMany(Rule::class);
+     }
 }

@@ -47,4 +47,10 @@ class EquipeRepositery implements EquipeInterface
 
         return $data;
     }
+    public function findById($id){
+        $data =  $this->equipe->where('id', '=', $id)->first();
+
+        return $data;
+
+    }
 }

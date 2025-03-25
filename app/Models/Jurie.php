@@ -10,6 +10,19 @@ class Jurie extends Model
     /** @use HasFactory<\Database\Factories\JurieFactory> */
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['name'];
      protected $table ="juries";
+
+
+
+     public function memberjuries()
+     {
+         return $this->hasMany(Jurie::class);
+     }
+
+     public function equipe()
+     {
+         return $this->belongsTo(Equipe::class, 'team_id');
+     }
+
 }

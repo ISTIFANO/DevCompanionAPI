@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('hackathons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('theme_id')->constrained('themes');
             $table->foreignId('organisateur_id')->constrained('users');
             $table->string('name');
             $table->text('description')->nullable();

@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Memberjurie;
+use App\Repository\EquipeRepositery;
+use App\Repository\JurieRepositery;
 use Illuminate\Http\Request;
 use App\Repository\MemberjurieRepositery;
 
 class MemberjurieController extends Controller
 {
 
-    public function __construct(protected MemberjurieRepositery $memberjurie_repositery)
+    public function __construct(protected MemberjurieRepositery $memberjurie_repositery,protected JurieRepositery $jurie_repositery)
     {
         $this->memberjurie_repositery = $memberjurie_repositery;
+        $this->jurie_repositery = $jurie_repositery;
     }
     /**
      * Display a listing of the resource.
@@ -45,9 +48,10 @@ class MemberjurieController extends Controller
                 'code' => $request->code,
             ];
 
+$jurie = $this->jurie_repositery->findByName($request->jurie);
+            $mb_jurie = $this->memberjurie_repositery->register($data,$jurie);
 
-            $equipe = $this->memberjurie_repositery->register($data);
-            return response()->json(["data" => $equipe]);
+            return response()->json(["memberjurie" => $mb_jurie]);
     
         } catch (Exception $e) {
             return response()->json([
