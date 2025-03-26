@@ -45,7 +45,7 @@ class MemberjurieController extends Controller
      
         $qrCodes['withImage'] = QrCode::size(200)->format('png')->merge('/public/img/logo.png', .4)->generate($code);
          
-        return view('qr-codes', $qrCodes);
+        return  $qrCodes;
  
     }
     /**
@@ -94,10 +94,10 @@ $jurie = $this->jurie_repositery->findByName($request->jurie);
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMemberjurieRequest $request, Memberjurie $memberjurie)
-    {
-        //
-    }
+    // public function update(UpdateMemberjurieRequest $request, Memberjurie $memberjurie)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
