@@ -15,7 +15,12 @@ class HackathonController extends Controller
     protected $hackathon_services;
 
 
-    public function __construct(HackathonRepositery $hackathon_repository, RulesRepositery $rule__repositery, UserRepositery $user_repositery, HackathonServices $hackathon_services, ThemeRepositery $theme_repositery)
+    public function __construct(
+        HackathonRepositery $hackathon_repository, 
+        RulesRepositery $rule__repositery, 
+        UserRepositery $user_repositery, 
+        HackathonServices $hackathon_services, 
+        ThemeRepositery $theme_repositery)
     {
         $this->hackathon_services = $hackathon_services;
     }
@@ -59,8 +64,10 @@ class HackathonController extends Controller
                 $ruleRequest = $request->rules;
 
                 $hackathon = $this->hackathon_services->store($organisateurRequest, $data, $themeRequest, $ruleRequest);
-
-                return response()->json(["hackathon" => $hackathon]);
+                return $hackathon;
+                return response()->json(["hackathon" => [
+                    "rules" => $hackathon
+                ]]);
             }
 
             return $this->finalResponse(null, 'Validation failed', 422);

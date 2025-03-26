@@ -19,10 +19,12 @@ class Hackathon extends Model
      {
          return $this->belongsTo(Theme::class,'theme_id');
      }
+     
      public function user()
      {
-         return $this->belongsTo(User::class,'organisateur_id');
+         return $this->belongsTo(User::class, 'organisateur_id');
      }
+
      public function rules()
      {
          return $this->belongsToMany(Rule::class);

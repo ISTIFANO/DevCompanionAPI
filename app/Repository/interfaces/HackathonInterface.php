@@ -2,6 +2,8 @@
 
 namespace App\Repository\interfaces;
 
+use App\Models\User;
+
 interface HackathonInterface{
 
     public function register($data,$organisateur,$roles,$themes);

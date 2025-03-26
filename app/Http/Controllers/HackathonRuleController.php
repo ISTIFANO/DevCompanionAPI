@@ -36,15 +36,15 @@ class HackathonRuleController extends Controller
      */
     public function store(Request $request)
     {  
-      $data =    $request->validate([
-        'theme_id' => 'required',
-        'organisateur_id' => 'required',
-        'name' => 'required|string|email',
-        'description' => 'required|string',
-        'start_date' => 'required',
-        'end_date' => 'required']);
+    //   $data =    $request->validate([
+    //     'theme_id' => 'required',
+    //     'organisateur_id' => 'required',
+    //     'name' => 'required|string|email',
+    //     'description' => 'required|string',
+    //     'start_date' => 'required',
+    //     'end_date' => 'required']);
 
-        $this->hackathon_repositery->register($data);
+    //     $this->hackathon_repositery->register($data);
     }
 
     /**

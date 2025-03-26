@@ -37,7 +37,7 @@ class UserRepositery implements UserInterface
     {
         $user =User::where('firstname', '=', $name)->whereHas('role', function ($query) {
             $query->where('role_name', 'organisateur');
-        })->get();
+        })->first();
         return $user;
     }
 }
