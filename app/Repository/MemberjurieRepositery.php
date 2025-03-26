@@ -21,7 +21,7 @@ class MemberjurieRepositery implements MemberjurieInterface
             $Memberjurie = new Memberjurie();
             $Memberjurie->name = $data["name"];
             $Memberjurie->code = $data["code"];
-
+            $Memberjurie->qr_code = $data["qr_code"];
             $mb_jurie = $Memberjurie->jurie()->associate($jurie);
             $Memberjurie->save();
         } catch (Exception $e) {

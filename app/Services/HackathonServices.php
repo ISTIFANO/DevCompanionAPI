@@ -71,30 +71,46 @@ class HackathonServices implements HackathonInterfaces
 
     public function store($organisateurRequest, $data, $themeRequest, $ruleRequest)
     {
+        $themesArr=[];
+        $rulesArr =[];
+
         try {
             DB::beginTransaction();
 
             $organisateur = $this->user_repositery->FindOrganisateur($organisateurRequest);
-            $hackathon = $this->hackathon_repository->register($data, $organisateur);
-    
+
 
             foreach ($ruleRequest as $rules) {
                 $HackathonRules = $this->rule__repositery->findByName($rules);
                 if (empty($HackathonRules)) {
 
-                    $this->rule__repositery->store($HackathonRules);
+                    $HackathonRules = $this->rule__repositery->store($HackathonRules);
+
                 }
-                $this->hackathon_repository->registerRoles($hackathon,$HackathonRules);
+                array_push($rulesArr , $HackathonRules);
+                
+                // $this->hackathon_repository->registerRules($hackathon,$HackathonRules);
             }
             foreach ($themeRequest as $theme) {
                 $theme = $this->theme_repositery->findbyName($theme);
+
                 if (empty($theme)) {
+                    
                     $this->theme_repositery->store($data);
                 }
-                $this->theme_repositery->register($theme, $hackathon);
+                array_push($themesArr, $theme);
+
+
+                }
+                // return $themesArr;
+
+
+                // return ['themes' => $themesArr , 'rules' => $rulesArr];
+                $hackathon = $this->hackathon_repository->register($data, $organisateur,$rulesArr,$themesArr);
+
                 DB::commit();
                 return $hackathon;
-            }
+            
         } catch (Exception $e) {
             DB::rollBack();
             return ["message " => $e->getMessage()];

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hackathon_rule;
-use App\Http\Requests\StoreHackathon_ruleRequest;
-use App\Http\Requests\UpdateHackathon_ruleRequest;
 use App\Repository\HackathonRepositery;
 use GuzzleHttp\Psr7\Request;
 
@@ -36,15 +34,15 @@ class HackathonRuleController extends Controller
      */
     public function store(Request $request)
     {  
-      $data =    $request->validate([
-        'theme_id' => 'required',
-        'organisateur_id' => 'required',
-        'name' => 'required|string|email',
-        'description' => 'required|string',
-        'start_date' => 'required',
-        'end_date' => 'required']);
+    //   $data =    $request->validate([
+    //     'theme_id' => 'required',
+    //     'organisateur_id' => 'required',
+    //     'name' => 'required|string|email',
+    //     'description' => 'required|string',
+    //     'start_date' => 'required',
+    //     'end_date' => 'required']);
 
-        $this->hackathon_repositery->register($data);
+    //     $this->hackathon_repositery->register($data);
     }
 
     /**
@@ -66,10 +64,10 @@ class HackathonRuleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHackathon_ruleRequest $request, Hackathon_rule $hackathon_rule)
-    {
-        //
-    }
+    // public function update(UpdateHackathon_ruleRequest $request, Hackathon_rule $hackathon_rule)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.

@@ -31,6 +31,12 @@ class User extends Authenticatable implements JWTSubject{
     {
         return $this->belongsTo(Role::class, 'role_id'); 
     }
+
+    public function hackathon() 
+    {
+        return $this->hasMany(Hackathon::class);
+    }
+
 protected $table="users";
     /**
      * The attributes that should be hidden for serialization.

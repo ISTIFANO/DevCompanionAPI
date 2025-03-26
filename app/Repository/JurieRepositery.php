@@ -3,6 +3,7 @@ namespace App\Repository;
 
 use App\Models\Jurie;
 use App\Repository\interfaces\JurieInterface;
+use Exception;
 
 class JurieRepositery implements JurieInterface{
 
@@ -18,12 +19,18 @@ class JurieRepositery implements JurieInterface{
 
     public function register($data,$team)
     {
-        $Jurie = $this->Jurie->create([
-            'name' => $data['name'],
-        ]);
-        $Juries = $Jurie->equipe()->associate($team);
 
-        return $Juries;
+        try{
+
+        $Jurie = new Jurie();
+        $Jurie->name = $data; 
+        $Jurie->equipe()->associate($team);
+
+        $Jurie->save();
+        return $Jurie;
+        }catch( Exception $e){
+            return ["message" =>$e->getMessage()];
+        }
     }
 
 

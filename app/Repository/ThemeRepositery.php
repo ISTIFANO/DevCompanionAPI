@@ -67,4 +67,11 @@ class ThemeRepositery implements Themeinterface
 
         return $theme;
     }
+    public function findbyid($id)
+    {
+
+        $theme =  Theme::where('id', '=', $id)->first();
+
+        return $theme;
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Memberjurie;
 use App\Repository\EquipeRepositery;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Repository\JurieRepositery;
 use Illuminate\Http\Request;
 use App\Repository\MemberjurieRepositery;
@@ -32,7 +33,21 @@ class MemberjurieController extends Controller
     {
         //
     }
-
+    public function generate($code) {
+        $qrCodes = [];
+        $qrCodes['simple'] = QrCode::size(120)->generate($code);
+        $qrCodes['changeColor'] = QrCode::size(120)->color(255, 0, 0)->generate($code);
+        $qrCodes['changeBgColor'] = QrCode::size(120)->backgroundColor(255, 0, 0)->generate($code);
+         
+        $qrCodes['styleDot'] = QrCode::size(120)->style('dot')->generate($code);
+        $qrCodes['styleSquare'] = QrCode::size(120)->style('square')->generate($code);
+        $qrCodes['styleRound'] = QrCode::size(120)->style('round')->generate($code);
+     
+        $qrCodes['withImage'] = QrCode::size(200)->format('png')->merge('/public/img/logo.png', .4)->generate($code);
+         
+        return  $qrCodes;
+ 
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -40,18 +55,19 @@ class MemberjurieController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:255',
-                'code' => 'required'            ]);
-    
+                'name' => 'required|string|max:255']);
+// pour generer Le code 
+                $code = parent::RandomNb();
             $data = [
                 'name' => $request->name,
-                'code' => $request->code,
+                'code' => $code,
+                'qr_code' => $this->generate($code),
             ];
 
 $jurie = $this->jurie_repositery->findByName($request->jurie);
             $mb_jurie = $this->memberjurie_repositery->register($data,$jurie);
 
-            return response()->json(["memberjurie" => $mb_jurie]);
+            return  $mb_jurie;
     
         } catch (Exception $e) {
             return response()->json([
@@ -78,10 +94,10 @@ $jurie = $this->jurie_repositery->findByName($request->jurie);
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMemberjurieRequest $request, Memberjurie $memberjurie)
-    {
-        //
-    }
+    // public function update(UpdateMemberjurieRequest $request, Memberjurie $memberjurie)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.

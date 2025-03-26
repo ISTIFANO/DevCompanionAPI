@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hackathon_rule', function (Blueprint $table) {
-            $table->foreignId('hackathon_id')->constrained('hackathons');
-            $table->foreignId('rule_id')->constrained('rules');
-            $table->primary(['hackathon_id', 'rule_id']);
+        Schema::table('memberjuries', function (Blueprint $table) {
+            $table->string("qr_code")->default("calhost/phpmyadmin/index.php?r"); 
         });
     }
 
@@ -23,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hackathon_rule');
+        Schema::table('memberjuries', function (Blueprint $table) {
+         
+            $table->dropColumn('qr_code'); 
+        });
     }
 };

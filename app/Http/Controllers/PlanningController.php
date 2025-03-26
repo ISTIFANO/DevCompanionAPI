@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Planning;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePlanningRequest;
 use App\Http\Requests\UpdatePlanningRequest;
 
@@ -27,7 +28,7 @@ class PlanningController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePlanningRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,7 +52,7 @@ class PlanningController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePlanningRequest $request, Planning $planning)
+    public function update(Request $request, Planning $planning)
     {
         //
     }

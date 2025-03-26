@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hackathon_rule', function (Blueprint $table) {
-            $table->foreignId('hackathon_id')->constrained('hackathons');
-            $table->foreignId('rule_id')->constrained('rules');
-            $table->primary(['hackathon_id', 'rule_id']);
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('team_id')->constrained('teams'); 
         });
     }
 
@@ -23,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hackathon_rule');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['team_id']); 
+            $table->dropColumn('team_id'); 
+        });
     }
 };

@@ -51,7 +51,7 @@ class ProjectController extends Controller
                 'description' =>$request->description
             ];
 
-            $theme = $this->theme_repositery->findbyid($request->theme_id);
+            $theme = $this->theme_repositery->findbyName($request->themm_name);
 
 
             $equipe = $this->project_repositery->register($data,$theme);
