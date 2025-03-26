@@ -10,6 +10,7 @@ use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\HackathonController;
+use App\Http\Controllers\JurieController;
 use App\Http\Controllers\MemberjurieController;
 
 Route::get('/user', function (Request $request) {
@@ -53,6 +54,11 @@ Route::post('/organisatur',[AuthController::class,'refresh']);
     Route::post('/activite/edit',[ActiviteController::class,'edit']);
     Route::post('/activite/destroy',[ActiviteController::class,'destroy']);
 
+    
+    Route::post('/Jurie/create',[JurieController::class,'store']);
+    Route::post('/Jurie/show',[JurieController::class,'show']);
+    Route::post('/Jurie/edit',[JurieController::class,'edit']);
+    Route::post('/Jurie/destroy',[JurieController::class,'destroy']);
     
     Route::post('/memberjurie/create',[MemberjurieController::class,'store'])->middleware('role');
     Route::post('/memberjurie/show',[MemberjurieController::class,'show']);

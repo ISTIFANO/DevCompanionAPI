@@ -16,12 +16,9 @@ class HackathonController extends Controller
 
 
     public function __construct(
-        HackathonRepositery $hackathon_repository, 
-        RulesRepositery $rule__repositery, 
-        UserRepositery $user_repositery, 
-        HackathonServices $hackathon_services, 
-        ThemeRepositery $theme_repositery)
-    {
+
+        HackathonServices $hackathon_services
+    ) {
         $this->hackathon_services = $hackathon_services;
     }
 
@@ -119,7 +116,7 @@ class HackathonController extends Controller
 
             return $this->finalResponse(null, 'Validation failed', 422);
         } catch (Exception $e) {
-            return $this->finalResponse($e,"Exception error", 500);
+            return $this->finalResponse($e, "Exception error", 500);
         }
     }
 

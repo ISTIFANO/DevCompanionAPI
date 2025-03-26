@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurie;
-use App\Http\Requests\StoreJurieRequest;
-use App\Http\Requests\UpdateJurieRequest;
+use App\Services\JurieService;
+use Exception;
+use Illuminate\Http\Request;
+
 
 class JurieController extends Controller
 {
+
+    protected $jurie_service;
+
+
+    public function __construct(
+
+        JurieService $jurie_service
+    ) {
+        $this->jurie_service = $jurie_service;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,9 +39,24 @@ class JurieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJurieRequest $request)
+    public function store(Request $request)
     {
-        //
+        try{
+        if($this->jurie_service->Validation("text",$request->name) &&  $this->jurie_service->Validation("text",$request->team) ){
+
+       
+        $data  = ["name" => $request->name ,"team" => $request->team];
+       $Jurie =  $this->jurie_service->register($data);
+       return $Jurie;
+    }
+    return $this->finalResponse(null, 'Validation failed', 422);
+
+}catch( Exception $e){
+
+        return ["message" => $e];
+
+    }
+
     }
 
     /**
@@ -51,10 +78,10 @@ class JurieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJurieRequest $request, Jurie $jurie)
-    {
-        //
-    }
+    // public function update(UpdateJurieRequest $request, Jurie $jurie)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.

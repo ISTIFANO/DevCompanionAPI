@@ -28,6 +28,9 @@ use App\Repository\interfaces\RulesInterface;
 use App\Repository\MemberjurieRepositery;
 use App\Repository\ProjectRepositery;
 use App\Repository\RulesRepositery;
+use App\Services\EquipeService;
+use App\Services\interfaces\EJurieInterface;
+use App\Services\JurieService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -48,6 +51,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ActiviteInterface::class,ActiviteRepositery::class);
         $this->app->bind(NoteInterface::class,NoteRepositery::class);
         $this->app->bind(MemberjurieInterface::class,MemberjurieRepositery::class);
+        $this->app->bind(EJurieInterface::class,JurieService::class);
+        $this->app->bind(EquipeInterface::class,EquipeService::class);
     }
 
     /**
