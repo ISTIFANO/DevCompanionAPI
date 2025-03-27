@@ -31,6 +31,7 @@ use App\Repository\RulesRepositery;
 use App\Services\EquipeService;
 use App\Services\interfaces\EJurieInterface;
 use App\Services\JurieService;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -60,6 +61,18 @@ class AppServiceProvider extends ServiceProvider
      */
    public function boot()
 {
+
+    Gate::define('isAdmin',function ($user)  {
+        return $user->isAdmin();
+    });
+    Gate::define('isOrganisatur',function ($user)  {
+        return $user->isOrganisatur();
+    });
+    Gate::define('isParticipant',function ($user)  {
+        return $user->isParticipant();
+    });
     Schema::defaultStringLength(191);
 }
 }
+// define function on models
+//declare gate on boot() function sur AppServiceProvider

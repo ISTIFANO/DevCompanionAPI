@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Services\HackathonServices;
-use App\Repository\HackathonRepositery;
+use App\Repository\UserRepositery;
 use App\Repository\RulesRepositery;
 use App\Repository\ThemeRepositery;
-use App\Repository\UserRepositery;
+use App\Services\HackathonServices;
+use Illuminate\Support\Facades\Gate;
+use App\Repository\HackathonRepositery;
 
 class HackathonController extends Controller
 {
@@ -43,6 +44,10 @@ class HackathonController extends Controller
      */
     public function store(Request $request)
     {
+   // otirisation pour organisatur 
+
+        Gate::allows('isOrganisatur');
+
         try {
             if (
                 $this->hackathon_services->validation("text", $request->description)
