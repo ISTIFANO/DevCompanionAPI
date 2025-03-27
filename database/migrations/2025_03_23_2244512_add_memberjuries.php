@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('code');
-            $table->foreignId('jurie_id')->constrained('juries');
+            $table->foreignId('jurie_id')->constrained('juries')->nullable();
             $table->timestamps();
         });
     }
