@@ -69,4 +69,16 @@ protected $table="users";
             'password' => 'hashed',
         ];
     }
+    public function isAdmine(){
+        return $this->role->role_name == "Admin";
+        
+    }
+    public function isParticipant(){
+        return $this->role->role_name == "Oarticipant";
+        
+    }
+    public function isOrganisatur(){
+        return $this->role->role_name == "Organisatur";
+        
+    }
 }

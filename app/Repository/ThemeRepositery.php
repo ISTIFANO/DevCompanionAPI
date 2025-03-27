@@ -14,6 +14,7 @@ class ThemeRepositery implements Themeinterface
 
     public function __construct()
     {
+        
         $this->themeModel = new Theme();
     }
 
@@ -60,9 +61,7 @@ class ThemeRepositery implements Themeinterface
     {
         DB::table("themes")->where('id', '=', $id)->update($data);
     }
-    public function findbyName($name)
-    {
-
+    public function findbyName($name){
         $theme =  Theme::where('name', '=', $name)->first();
 
         return $theme;
